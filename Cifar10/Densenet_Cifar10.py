@@ -1,5 +1,4 @@
 import tensorflow as tf
-from tflearn.layers.conv import global_avg_pool
 from tensorflow.contrib.layers import batch_norm, flatten
 from tensorflow.contrib.layers import xavier_initializer
 from tensorflow.contrib.framework import arg_scope
@@ -32,15 +31,16 @@ def conv_layer(input, filter, kernel, stride=1, layer_name="conv"):
         return network
 
 def Global_Average_Pooling(x, stride=1):
-    """
+    
     width = np.shape(x)[1]
     height = np.shape(x)[2]
     pool_size = [width, height]
     return tf.layers.average_pooling2d(inputs=x, pool_size=pool_size, strides=stride) # The stride value does not matter
+    """
     It is global average pooling without tflearn
     """
 
-    return global_avg_pool(x, name='Global_avg_pooling')
+    #return global_avg_pool(x, name='Global_avg_pooling')
     # But maybe you need to install h5py and curses or not
 
 
