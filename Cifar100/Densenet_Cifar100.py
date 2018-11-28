@@ -259,7 +259,7 @@ with tf.Session() as sess:
                 batch_x = train_x[pre_index : ]
                 batch_y = train_y[pre_index : ]
 
-            batch_x = data_augmentation(batch_x)
+            #batch_x = data_augmentation(batch_x)
 
             train_feed_dict = {
                 x: batch_x,
