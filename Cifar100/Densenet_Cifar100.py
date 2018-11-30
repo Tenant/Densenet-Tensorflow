@@ -199,10 +199,12 @@ class DenseNet():
 
 train_x, train_y, test_x, test_y = prepare_data()
 train_x, test_x = color_preprocessing(train_x, test_x)
+train_y = np.array(encode(train_y,100))
+test_y = np.array(encode(test_y,100))
 
 # image_size = 32, img_channels = 3, class_num = 10 in cifar10
 x = tf.placeholder(tf.float32, shape=[None, image_size, image_size, img_channels])
-label = tf.placeholder(tf.float32, shape=[None, class_num])
+label = tf.placeholder(tf.float32, shape=[None,100])
 
 training_flag = tf.placeholder(tf.bool)
 
@@ -259,7 +261,7 @@ with tf.Session() as sess:
                 batch_x = train_x[pre_index : ]
                 batch_y = train_y[pre_index : ]
 
-            #batch_x = data_augmentation(batch_x)
+            batch_x = data_augmentation(batch_x)
 
             train_feed_dict = {
                 x: batch_x,

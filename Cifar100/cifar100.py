@@ -11,7 +11,7 @@ import h5py
 import pickle
 import random
 
-class_num = 10
+class_num = 100
 image_size = 32
 img_channels = 3
 
@@ -74,7 +74,7 @@ def load_data(train_file):
         length = len(d[b'fine_labels'])
 
         return (
-            data.reshape(length, 3, 32, 32),
+            np.moveaxis(data.reshape(length, 3, 32, 32),1,-1),
             np.array(coarse_labels),
             np.array(fine_labels)
         )
@@ -149,8 +149,14 @@ def data_augmentation(batch):
     return batch
 
 
-train_data, train_labels, test_data, test_labels = prepare_data()
-print(np.shape(train_data))
-print(np.shape(train_labels))
-print(np.shape(test_data))
-print(np.shape(test_labels))
+def encode(y, class_num):
+    y_matrix = []
+    for i in range(len(y)):
+        y_row = []
+        for j in range(class_num):
+            if y[i] == j:
+                y_row.append(1)
+            else:
+                y_row.append(0)
+        y_matrix.append(y_row)
+    return y_matrix
