@@ -3,6 +3,7 @@ from tensorflow.contrib.layers import batch_norm, flatten
 from tensorflow.contrib.layers import xavier_initializer
 from tensorflow.contrib.framework import arg_scope
 from cifar10 import *
+import numpy as np
 
 # Hyperparameter
 growth_k = 24
