@@ -105,3 +105,6 @@ ENV/
 logs/
 *.gz
 logs.txt
+
+#
+data/
